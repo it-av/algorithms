@@ -16,9 +16,8 @@ func NewTreap() *Treap {
 	return &Treap{root: nil}
 }
 
-func (t *Treap) Add(itemId int, itemPriority int) *Treap {
-	r := t.union(t.root, &node{id: itemId, priority: itemPriority, cnt:1})
-	return &Treap{root: r}
+func (t *Treap) Add(itemId int, itemPriority int) {
+	t.root = t.union(t.root, &node{id: itemId, priority: itemPriority, cnt:1})
 }
 
 func (t *Treap) Traverse(n *node, add int) {

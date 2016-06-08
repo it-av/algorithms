@@ -23,9 +23,8 @@ func NewTreap() *Treap {
 	return &Treap{root: nil}
 }
 
-func (t *Treap) Upsert(itemId int, itemPriority int) *Treap {
-	r := t.union(t.root, &node{id: itemId, priority: itemPriority, cnt:1})
-	return &Treap{root: r}
+func (t *Treap) Upsert(itemId int, itemPriority int) {
+	t.root = t.union(t.root, &node{id: itemId, priority: itemPriority, cnt:1})
 }
 
 func (t *Treap) union(this *node, that *node) *node {
@@ -105,7 +104,7 @@ func main() {
 	for i := 0; i < n; i++ {
 		var id int
 		fmt.Scanf("%d", &id)
-		t = t.Upsert(id, rand.Int())
+		t.Upsert(id, rand.Int())
 	}
 
 	fmt.Scanf("%d", &m)
