@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "graph"
+	_ "github.com/it-av/algorithms/graph"
 )
 
 func main() {
