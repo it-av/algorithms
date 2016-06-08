@@ -1,15 +1,15 @@
-package treap
+package structures
 
 type Treap struct {
-	root *node
+	root *treapNode
 }
 
-type node struct {
+type treapNode struct {
 	id       int
 	priority int
 	cnt      int
-	left     *node
-	right    *node
+	left     *treapNode
+	right    *treapNode
 }
 
 func NewTreap() *Treap {
@@ -17,10 +17,10 @@ func NewTreap() *Treap {
 }
 
 func (t *Treap) Add(itemId int, itemPriority int) {
-	t.root = t.union(t.root, &node{id: itemId, priority: itemPriority, cnt: 1})
+	t.root = t.union(t.root, &treapNode{id: itemId, priority: itemPriority, cnt: 1})
 }
 
-func (t *Treap) Traverse(n *node, add int) {
+func (t *Treap) Traverse(n *treapNode, add int) {
 	if n != nil {
 		// curKey := add + t.cnt(n.left)
 		t.Traverse(n.left, add)
@@ -28,7 +28,7 @@ func (t *Treap) Traverse(n *node, add int) {
 	}
 }
 
-func (t *Treap) union(this *node, that *node) *node {
+func (t *Treap) union(this *treapNode, that *treapNode) *treapNode {
 	if this == nil {
 		return that
 	}
@@ -48,7 +48,7 @@ func (t *Treap) union(this *node, that *node) *node {
 
 }
 
-func (t *Treap) split(n *node, key int, add int) (*node, *node) {
+func (t *Treap) split(n *treapNode, key int, add int) (*treapNode, *treapNode) {
 	if n == nil {
 		return nil, nil
 	}
@@ -68,14 +68,14 @@ func (t *Treap) split(n *node, key int, add int) (*node, *node) {
 	}
 }
 
-func (t *Treap) cnt(n *node) int {
+func (t *Treap) cnt(n *treapNode) int {
 	if n != nil {
 		return n.cnt
 	}
 	return 0
 }
 
-func (t *Treap) updateCnt(n *node) {
+func (t *Treap) updateCnt(n *treapNode) {
 	if n != nil {
 		n.cnt = 1 + t.cnt(n.left) + t.cnt(n.right)
 	}
