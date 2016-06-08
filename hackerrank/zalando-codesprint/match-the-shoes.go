@@ -38,7 +38,8 @@ func main() {
 	A := make(map[int]int, M)
 
 	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
+	for i := 0; i < N; i++ {
+		scanner.Scan()
 		number, _ := strconv.Atoi(strings.TrimSpace(scanner.Text()))
 		A[number] += 1
 	}
@@ -56,8 +57,27 @@ func main() {
 	for i := 0; i < K; i++ {
 		fmt.Println(shoes[i].Id)
 	}
-
 }
+
+/*
+Sample Input:
+3 4 8
+2
+1
+2
+0
+3
+3
+1
+2
+*/
+
+/*
+Sample Output:
+2
+1
+3
+*/
 
 /* results:
 Test Case #0: 0.22 s
