@@ -2,7 +2,6 @@ package structures
 
 import "testing"
 
-
 func Add(args ...int) int {
 	res := 0
 	for _, v := range args {
@@ -12,9 +11,9 @@ func Add(args ...int) int {
 }
 
 var cases = []struct {
-    args []int
-    want int
-} {
+	args []int
+	want int
+}{
 	{[]int{3, 5}, 8},
 }
 

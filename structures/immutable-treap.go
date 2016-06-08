@@ -1,11 +1,9 @@
 package structures
 
-
 type ImmutableTreap struct {
-	root *node
+	root     *node
 	callback func(key, value int)
 }
-
 
 type node struct {
 	id       int
@@ -111,5 +109,3 @@ func (t *ImmutableTreap) traverse(n *node, add int) {
 
 	}
 }
-
-
