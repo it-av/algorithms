@@ -24,7 +24,7 @@ func NewTreap() *Treap {
 }
 
 func (t *Treap) Upsert(itemId int, itemPriority int) {
-	t.root = t.union(t.root, &node{id: itemId, priority: itemPriority, cnt:1})
+	t.root = t.union(t.root, &node{id: itemId, priority: itemPriority, cnt: 1})
 }
 
 func (t *Treap) union(this *node, that *node) *node {
@@ -38,11 +38,11 @@ func (t *Treap) union(this *node, that *node) *node {
 	if this.priority > that.priority {
 		this.right = t.union(this.right, that)
 		t.updateCnt(this)
-		return this;
+		return this
 	} else {
 		that.left = t.union(this, that.left)
 		t.updateCnt(that)
-		return that;
+		return that
 	}
 
 }
@@ -53,15 +53,15 @@ func (t *Treap) split(n *node, key int, add int) (*node, *node) {
 
 	curKey := add + t.cnt(n.left)
 
-	if (key <= curKey) {
+	if key <= curKey {
 		left, right := t.split(n.left, key, add)
 		n.left = right
-		t.updateCnt(n);
+		t.updateCnt(n)
 		return left, n
 	} else {
-		left, right := t.split(n.right, key, add + 1 + t.cnt(n.left))
+		left, right := t.split(n.right, key, add+1+t.cnt(n.left))
 		n.right = left
-		t.updateCnt(n);
+		t.updateCnt(n)
 		return n, right
 	}
 }
@@ -70,7 +70,7 @@ func (t *Treap) cnt(n *node) int {
 	if n != nil {
 		return n.cnt
 	}
-	return 0;
+	return 0
 }
 
 func (t *Treap) updateCnt(n *node) {
@@ -91,9 +91,9 @@ func (t *Treap) toFront(n *node, l int, r int) {
 
 func (t *Treap) traverse(n *node, add int) {
 	if n != nil {
-		Answer[add + t.cnt(n.left)] = n.id
+		Answer[add+t.cnt(n.left)] = n.id
 		t.traverse(n.left, add)
-		t.traverse(n.right, add + t.cnt(n.left) + 1)
+		t.traverse(n.right, add+t.cnt(n.left)+1)
 	}
 }
 
@@ -118,7 +118,7 @@ func main() {
 
 	for i := 0; i < n; i++ {
 		fmt.Print(Answer[i])
-		fmt.Print(" ");
+		fmt.Print(" ")
 	}
 
 }
