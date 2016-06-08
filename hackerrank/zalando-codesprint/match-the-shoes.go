@@ -1,4 +1,4 @@
-package hackerrank
+package main
 
 import (
 	"bufio"
