@@ -1,6 +1,7 @@
 package sorting
 
 import (
+	"reflect"
 	"sort"
 	"testing"
 	"testing/quick"
@@ -27,6 +28,22 @@ func sortWrapper(vals []float64) *[]float64 {
 	return &f64
 }
 
+var testCases = []struct {
+	in  []float64
+	out *[]float64
+}{
+	{[]float64{2, 3, 1}, &[]float64{1, 2, 3}},
+}
+
+func TestQuickSort2(t *testing.T) {
+	for _, test := range testCases {
+		result := QuickSort(test.in...)
+		if !reflect.DeepEqual(result, test.out) {
+			t.Errorf("Unexpected listing: want=%v got=%v \n", test.out, result)
+		}
+	}
+}
+
 /*
 go test github.com/it-av/algorithms/sorting -v
- */
+*/
