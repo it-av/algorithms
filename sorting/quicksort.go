@@ -1,8 +1,12 @@
 package sorting
 
-func QuickSort(nums ...float64) *[]float64 {
+import "math/rand"
+
+func QuickSort(a *[]float64) {
 	partition := func(arr *[]float64, low, high int) int {
 		a := *arr
+		ind := low + rand.Intn(high-low+1)
+		a[ind], a[high] = a[high], a[ind]
 		pivot := a[high]
 		i := low
 		for j := low; j < high; j++ {
@@ -22,9 +26,5 @@ func QuickSort(nums ...float64) *[]float64 {
 			sort(a, p+1, high)
 		}
 	}
-	a := nums[:]
-
-	sort(&a, 0, len(nums)-1)
-
-	return &a
+	sort(a, 0, len(*a)-1)
 }
