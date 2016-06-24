@@ -77,6 +77,18 @@ func BenchmarkStandartQuickSort(b *testing.B) {
 	}
 }
 
+func BenchmarkStandartQuickSort2(b *testing.B) {
+	n := 10000
+	a := make([]float64, n)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		for i := 0; i < n; i++ {
+			a[i] = float64(n - i)
+		}
+		QuickSort2(&a)
+	}
+}
+
 /*
 go test github.com/it-av/algorithms/sorting -v
 go test github.com/it-av/algorithms/sorting -v --bench=.

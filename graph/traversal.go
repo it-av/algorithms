@@ -21,6 +21,34 @@ func (al *AdjacencyList) DFS(v int) {
 	}
 }
 
+// Breadth First Search
+// The "patient" strategy: search nearest nodes first
+// Useful for: Explore all short-distance options before proceeding
+// Find distance to starting point node
+func (al *AdjacencyList) BFS(v int) {
+	al.Visited[v] = true
+	queue := al.List[v]
+	al.TraversalPath = append(al.TraversalPath, v)
+
+	for len(queue) > 0 {
+		al.TraversalPath = append(al.TraversalPath, queue[0])
+		al.Visited[queue[0]] = true
+
+		for _, v := range al.List[queue[0]] {
+			if _, ok := al.Visited[v]; ok {
+				continue
+			}
+			if queue[len(queue)-1] == v {
+				continue
+			}
+
+			queue = append(queue, v)
+		}
+
+		queue = queue[1:]
+	}
+}
+
 // Strategy: Handle each node before its children
 // For printing a hierarchy
 func (al *AdjacencyList) Preorder(v, level int) {
@@ -53,7 +81,13 @@ func init() {
 	adjacencyList.List[9] = []int{6}
 
 	adjacencyList.DFS(1)
-	fmt.Printf("Traversal: %+v \n", adjacencyList.TraversalPath)
+	fmt.Printf("DFS traversal: %+v \n", adjacencyList.TraversalPath)
+
+	// Graph: BFS
+	adjacencyList.TraversalPath = []int{}
+	adjacencyList.Visited = map[int]bool{}
+	adjacencyList.BFS(1)
+	fmt.Printf("BFS traversal: %+v \n", adjacencyList.TraversalPath)
 
 	// Tree: preorder DFS
 	adjacencyList = &AdjacencyList{

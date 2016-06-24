@@ -28,3 +28,32 @@ func QuickSort(a *[]float64) {
 	}
 	sort(a, 0, len(*a)-1)
 }
+
+func QuickSort2(arr *[]float64) (mergedSolution []float64) {
+	a := *arr
+
+	if len(a) <= 1 {
+		return a
+	}
+
+	pivotIndex := rand.Intn(len(a) - 1)
+
+	less := []float64{}
+	larger := []float64{}
+	for i, _ := range a {
+		if i == pivotIndex {
+			continue
+		}
+		if a[i] < a[pivotIndex] {
+			less = append(less, a[i])
+		} else {
+			larger = append(larger, a[i])
+		}
+	}
+
+	mergedSolution = QuickSort2(&less)
+	mergedSolution = append(mergedSolution, a[pivotIndex])
+	mergedSolution = append(mergedSolution, QuickSort2(&larger)...)
+
+	return
+}
