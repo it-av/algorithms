@@ -51,6 +51,47 @@ func TestQuickSort2(t *testing.T) {
 	}
 }
 
+var testIntCases = []struct {
+	in  []int
+	out []int
+}{
+	{[]int{12, 9, 3, 7, 14, 11, 6, 2, 10, 5}, []int{2, 3, 5, 6, 7, 9, 10, 11, 12, 14}},
+}
+
+func TestSelectionSort(t *testing.T) {
+	for _, test := range testIntCases {
+		arr := make([]int, len(test.in))
+		copy(arr, test.in)
+
+		SelectionSort(arr)
+		if !reflect.DeepEqual(arr, test.out) {
+			t.Errorf("Unexpected listing: want=%v got=%v \n", test.out, arr)
+		}
+	}
+}
+
+func TestInsertionSort(t *testing.T) {
+	for _, test := range testIntCases {
+		arr := make([]int, len(test.in))
+		copy(arr, test.in)
+		InsertionSort(arr)
+		if !reflect.DeepEqual(arr, test.out) {
+			t.Errorf("Unexpected listing: want=%v got=%v \n", test.out, arr)
+		}
+	}
+}
+
+func TestMergeSort(t *testing.T) {
+	for _, test := range testIntCases {
+		arr := make([]int, len(test.in))
+		copy(arr, test.in)
+		MergeSort(arr)
+		if !reflect.DeepEqual(arr, test.out) {
+			t.Errorf("Unexpected listing: want=%v got=%v \n", test.out, arr)
+		}
+	}
+}
+
 func BenchmarkQuickSort(b *testing.B) {
 	n := 10000
 	a := make([]float64, n)

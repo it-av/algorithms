@@ -1,14 +1,14 @@
 package main
 
 import (
+	"bufio"
+	"bytes"
 	"fmt"
+	"os"
+	"sort"
 	"strconv"
 	"strings"
 	"unicode"
-	"os"
-	"sort"
-	"bufio"
-	"bytes"
 )
 
 var (
@@ -22,11 +22,11 @@ type Reader struct {
 
 func (r *Reader) spaceMap(str string) string {
 	return strings.Map(func(r rune) rune {
-			if unicode.IsSpace(r) {
-				return ' '
-			}
-			return r
-		}, str)
+		if unicode.IsSpace(r) {
+			return ' '
+		}
+		return r
+	}, str)
 }
 
 func (r *Reader) ReadAll() {
@@ -75,7 +75,7 @@ func main() {
 
 	result := make(map[int]int, n)
 
-	for i:=1; i <= n; i++ {
+	for i := 1; i <= n; i++ {
 		l := r.NextInt()
 		r := r.NextInt()
 
@@ -110,7 +110,7 @@ func main() {
 		}
 	}
 
-	for i:=1; i<=n; i++ {
+	for i := 1; i <= n; i++ {
 		fmt.Println(result[i])
 	}
 }
