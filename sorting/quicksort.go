@@ -1,6 +1,8 @@
 package sorting
 
-import "math/rand"
+import (
+	"math/rand"
+)
 
 func QuickSort(a *[]float64) {
 	partition := func(arr *[]float64, low, high int) int {
@@ -56,4 +58,36 @@ func QuickSort2(arr *[]float64) (mergedSolution []float64) {
 	mergedSolution = append(mergedSolution, QuickSort2(&larger)...)
 
 	return
+}
+
+func QuickSort3(a []int) {
+	partition := func(a []int, p, r int) int {
+		q := p
+
+		randomIndex := p + rand.Intn(r-p+1)
+		a[randomIndex], a[r] = a[r], a[randomIndex]
+
+		for u := p; u < r; u++ {
+			if a[u] <= a[r] {
+				a[q], a[u] = a[u], a[q]
+				q++
+			}
+		}
+		a[q], a[r] = a[r], a[q]
+
+		return q
+	}
+
+	var sort func([]int, int, int)
+	sort = func(a []int, p, r int) {
+		if p >= r {
+			return
+		}
+
+		q := partition(a, p, r)
+		sort(a, p, q-1)
+		sort(a, q+1, r)
+	}
+
+	sort(a, 0, len(a)-1)
 }

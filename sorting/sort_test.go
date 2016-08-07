@@ -92,6 +92,17 @@ func TestMergeSort(t *testing.T) {
 	}
 }
 
+func TestQuickSort3(t *testing.T) {
+	for _, test := range testIntCases {
+		arr := make([]int, len(test.in))
+		copy(arr, test.in)
+		QuickSort3(arr)
+		if !reflect.DeepEqual(arr, test.out) {
+			t.Errorf("Unexpected listing: want=%v got=%v \n", test.out, arr)
+		}
+	}
+}
+
 func BenchmarkQuickSort(b *testing.B) {
 	n := 10000
 	a := make([]float64, n)
